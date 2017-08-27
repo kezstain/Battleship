@@ -9,14 +9,14 @@ namespace BattleShip.Engine.Models
     public class TargetDetails
     {
         public string TargetName { get; }
-        public int Height { get; }
-        public int Width { get; }
+        public int Length { get; }
+        public int Column { get; set; }
+        public int Row { get; set; }
 
-        public TargetDetails(string targetName, int height, int width)
+        public TargetDetails(string targetName, int length)
         {
             TargetName = targetName;
-            Height = height;
-            Width = width;
+            Length = length;
         }
     }
 }

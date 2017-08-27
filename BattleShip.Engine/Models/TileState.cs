@@ -10,5 +10,7 @@ namespace BattleShip.Engine.Models
         public TileHitState HitState { get; set; }
         public int Column { get; set; }
         public int Row { get; set; }
+        public int PossibleHits { get; set; }
+        public decimal PossibleHitPercentage { get; set; }
     }
 }

@@ -35,6 +35,9 @@
             // 
             // gameBoardTable
             // 
+            this.gameBoardTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gameBoardTable.AutoScroll = true;
             this.gameBoardTable.BackColor = System.Drawing.Color.GhostWhite;
             this.gameBoardTable.ColumnCount = 1;
@@ -44,7 +47,7 @@
             this.gameBoardTable.Padding = new System.Windows.Forms.Padding(5);
             this.gameBoardTable.RowCount = 1;
             this.gameBoardTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.gameBoardTable.Size = new System.Drawing.Size(612, 567);
+            this.gameBoardTable.Size = new System.Drawing.Size(776, 607);
             this.gameBoardTable.TabIndex = 0;
             // 
             // btnSetupGame
@@ -71,7 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 592);
+            this.ClientSize = new System.Drawing.Size(1000, 631);
             this.Controls.Add(this.btnCalculateHitPercent);
             this.Controls.Add(this.btnSetupGame);
             this.Controls.Add(this.gameBoardTable);

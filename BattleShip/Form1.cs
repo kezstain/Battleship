@@ -1,8 +1,10 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BattleShip.Controls;
 using BattleShip.Engine;
+using BattleShip.Engine.Models;
 using BattleShip.Engine.Services;
 
 namespace BattleShip
@@ -68,8 +70,16 @@ namespace BattleShip
 
         private void btnCalculateHitPercent_Click(object sender, System.EventArgs e)
         {
-            Game.PlayerStates.ForEach(PlayerStateHitPercentageHelper.CalculatePossibleHits());
-            
+            var ships = new List<TargetDetails>
+            {
+                new TargetDetails("Small Ship",5),
+                new TargetDetails("Small Ship",4),
+                new TargetDetails("Small Ship",3),
+                new TargetDetails("Small Ship",3),
+                new TargetDetails("Small Ship",2)
+            };
+            Game.PlayerStates.ForEach(PlayerStateHitPercentageHelper.CalculatePossibleHits(ships));
+            DrawBoard();
         }
     }
 }

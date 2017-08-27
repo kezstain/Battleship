@@ -22,17 +22,17 @@ namespace BattleShip.Controls
             _tileState = tileState;
             _playerName = playerName;
 
-            Height = 40;
-            Width = 40;
-
             InitializeComponent();
+
+            Height = 60;
+            Width = 60;
         }
 
         public void Draw()
         {
             labelCoordinates.Text = $@"({_tileState.Column},{_tileState.Row})";
             lblPlayerName.Text = _playerName;
-
+            lblPercentage.Text = _tileState.PossibleHits + @"," + _tileState.PossibleHitPercentage.ToString("P");
             switch (_tileState.HitState)
             {
                 case TileHitState.Hit:
