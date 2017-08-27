@@ -14,12 +14,12 @@ namespace BattleShip.Controls
 {
     public partial class TileDisplay : UserControl
     {
-        private TileState _tileState;
+        public TileState TileState;
         private string _playerName;
 
         public TileDisplay(TileState tileState, string playerName)
         {
-            _tileState = tileState;
+            TileState = tileState;
             _playerName = playerName;
 
             InitializeComponent();
@@ -30,10 +30,10 @@ namespace BattleShip.Controls
 
         public void Draw()
         {
-            labelCoordinates.Text = $@"({_tileState.Column},{_tileState.Row})";
+            labelCoordinates.Text = $@"({TileState.Column},{TileState.Row})";
             lblPlayerName.Text = _playerName;
-            lblPercentage.Text = _tileState.PossibleHits + @"," + _tileState.PossibleHitPercentage.ToString("P");
-            switch (_tileState.HitState)
+            lblPercentage.Text = TileState.PossibleHits + @"," + TileState.PossibleHitPercentage.ToString("P");
+            switch (TileState.HitState)
             {
                 case TileHitState.Hit:
                     BackColor = Color.LawnGreen;
@@ -45,6 +45,11 @@ namespace BattleShip.Controls
                     BackColor = Color.LightSeaGreen;
                     break;
             }
+        }
+
+        private void labelCoordinates_Click(object sender, EventArgs e)
+        {
+            OnClick(e);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BattleShip.Controls;
 using BattleShip.Engine;
+using BattleShip.Engine.Enumerations;
 using BattleShip.Engine.Models;
 using BattleShip.Engine.Services;
 
@@ -12,6 +13,7 @@ namespace BattleShip
     public partial class Form1 : Form
     {
         private Game Game;
+        private TileDisplay EditingTileDisplay { get; set; }
 
         public Form1()
         {
@@ -52,9 +54,28 @@ namespace BattleShip
                     var tileDisplay = new TileDisplay(gameBoardTile, playerState.PlayerName);
                     gameBoardTable.Controls.Add(tileDisplay, gameBoardTile.Column, gameBoardTile.Row+Game.NumberOfRows*playerIndex);
                     tileDisplay.Draw();
+                    tileDisplay.Click += TileDisplay_Click;
                 });
             }
             gameBoardTable.ResumeLayout();
+        }
+
+        private void TileDisplay_Click(object sender, System.EventArgs e)
+        {
+            EditingTileDisplay = (TileDisplay) sender;
+            switch (EditingTileDisplay.TileState.HitState)
+            {
+                case TileHitState.Unknown:
+                    rdoUnknown.Checked = true;
+                    break;
+                case TileHitState.Hit:
+                    rdoHit.Checked = true;
+                    break;
+                case TileHitState.Miss:
+                    rdoMiss.Checked = true;
+                    break;
+            }
+            lblHitPercentage.Text = @"Possible Hits: " + EditingTileDisplay.TileState.PossibleHits + @" (" + EditingTileDisplay.TileState.PossibleHitPercentage.ToString("P") + @")";
         }
 
         private void DrawBoard()
@@ -79,6 +100,29 @@ namespace BattleShip
                 new TargetDetails("Small Ship",2)
             };
             Game.PlayerStates.ForEach(PlayerStateHitPercentageHelper.CalculatePossibleHits(ships));
+            DrawBoard();
+        }
+
+        private void rdoUnknown_CheckedChanged(object sender, System.EventArgs e)
+        {
+            EditingTileDisplay.TileState.HitState=TileHitState.Unknown;
+            DrawBoard();
+        }
+
+        private void rdoHit_CheckedChanged(object sender, System.EventArgs e)
+        {
+            EditingTileDisplay.TileState.HitState = TileHitState.Hit;
+            DrawBoard();
+        }
+
+        private void rdoMiss_CheckedChanged(object sender, System.EventArgs e)
+        {
+            EditingTileDisplay.TileState.HitState = TileHitState.Miss;
+            DrawBoard();
+        }
+
+        private void btnRefresh_Click(object sender, System.EventArgs e)
+        {
             DrawBoard();
         }
     }
